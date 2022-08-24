@@ -16,6 +16,7 @@ jobs:
           POSTGRES_USER: test
           POSTGRES_DB: test_database
           POSTGRES_PORT: 5432
+
         ports:
           - 5432:5432
         options: >-
@@ -34,3 +35,4 @@ jobs:
         run: npm test
         env:
           TEST_DB_URL: postgres://test:123456@postgres:5432/test_database
+
