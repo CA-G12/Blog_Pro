@@ -53,12 +53,18 @@ function createPosts(data) {
     const likeIcon = document.createElement('i');
     likeIcon.classList.add('fa-solid');
     likeIcon.classList.add('fa-thumbs-up');
+    const likeSpan= document.createElement('span')
+    likeSpan.textContent='Like'
+    commentContainer.appendChild(likeSpan);
     likeContainer.appendChild(likeIcon);
 
     const commentContainer = document.createElement('div');
     const commentIcon = document.createElement('i');
     commentIcon.classList.add('fa-solid');
     commentIcon.classList.add('fa-comment');
+    const commentSpan= document.createElement('span')
+    commentSpan.textContent='Comment'
+    commentContainer.appendChild(commentSpan);
     commentContainer.appendChild(commentIcon);
     commentContainer.addEventListener('click', (e) => {
       console.log(e.target.parentNode.parentNode.parentNode);
@@ -70,6 +76,9 @@ function createPosts(data) {
     const deleteIcon = document.createElement('i');
     deleteIcon.classList.add('fa-solid');
     deleteIcon.classList.add('fa-trash');
+    const deleteSpan= document.createElement('span')
+    deleteSpan.textContent='Comment'
+    commentContainer.appendChild(deleteSpan);
     deleteContainer.appendChild(deleteIcon);
 
     iconsDiv.appendChild(likeContainer);

@@ -20,3 +20,15 @@ test('test post endpoint', (done) => {
       return done();
     });
 });
+
+test('test posts endpoint', (done) => {
+  request(app)
+    .get('/api/v1/posts')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end((err, res) => {
+      if (err) return done(err);
+      expect(res.body[0].category).toBe('sport');
+      done();
+    });
+});
