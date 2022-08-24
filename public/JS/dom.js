@@ -5,7 +5,7 @@ const contentPost = document.querySelector('#content');
 const postSection = document.querySelector('.posts');
 const popUpSec = document.querySelector('.pop-up-sec');
 
-const commetFunction = (data) => {
+const commentFunction = (data) => {
   data.forEach((ele) => {
     const popUpBody = document.createElement('div');
     popUpBody.className = 'pop-up-body';
@@ -30,8 +30,8 @@ const commetFunction = (data) => {
   });
 };
 
-const fetchComment = () => {
-  fetch('api/v1/getCommit').then((res) => res.json()).then((data) => commetFunction(data.rows));
+const fetchComment = (id) => {
+  fetch(`api/v1/getComment/${id}`).then((res) => res.json()).then((data) => commentFunction(data));
 };
 
 function createPosts(data) {
@@ -68,11 +68,8 @@ function createPosts(data) {
     commentContainer.appendChild(commentIcon);
     commentContainer.appendChild(commentSpan);
     commentContainer.addEventListener('click', (e) => {
-      console.log(e.target.parentNode.parentNode.parentNode.id == element.id);
-      if (e.target.parentNode.parentNode.parentNode.id == element.id) {
-        popUpSec.classList.add('active');
-        fetchComment();
-      }
+      popUpSec.classList.add('active');
+        fetchComment(element.id);
     });
 
     const deleteContainer = document.createElement('div');

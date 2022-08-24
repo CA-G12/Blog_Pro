@@ -1,6 +1,7 @@
 const { getComment } = require('../database/queries/index');
 
 const getCommentData = (req, res) => {
-  getComment().then((data) => res.json(data));
+  const {id} = req.params;
+  getComment(id).then((data) => res.json(data.rows));
 };
 module.exports = getCommentData;
