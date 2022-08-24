@@ -14,7 +14,7 @@ test('test post endpoint', (done) => {
       if (err) return done(err);
 
       expect(res.statusCode).toEqual(200);
-      expect(res.body.data).toEqual({
+      expect(res.body.data[0]).toEqual({
         id: 5, category: 'husam', image: 'kamal', content: 'husam',
       });
       return done();
