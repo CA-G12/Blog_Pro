@@ -123,7 +123,12 @@
     opacity: 1;
     visibility: visible;
   }
-
+  .iconColor{
+    color: blue !important;
+  }
+  .fa-thumbs-up:hover{
+    cursor: pointer;
+  }
   .landing-img{
     width: 100%;
     margin-top: 6rem;
