@@ -1,9 +1,5 @@
-const connection = require('../config/connection')
+const connection = require('../config/connection');
 
-const getData =()=>{
-  return connection.query('select * from posts');
-}
+const getData = () => connection.query('select * from posts');
 
-
-
-module.exports=getData
+module.exports = getData;

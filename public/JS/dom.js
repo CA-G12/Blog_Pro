@@ -1,21 +1,45 @@
-fetch('/posts')
-  .then((res) => res.json())
-  .then((res) => createPosts(res))
-  .catch((err) => console.log(err));
+const addButtonPost = document.querySelector('.add-buton');
+const categoryPost = document.querySelector('#Category');
+const imagePost = document.querySelector('#image');
+const contentPost = document.querySelector('#content');
 
-const postSection= document.querySelector('.posts')
+addButtonPost.addEventListener('click', (e) => {
+  e.preventDefault();
+  fetch('api/v1/post', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      category: categoryPost.value,
+      image: imagePost.value,
+      content: contentPost.value,
+    }),
+  })
+    .then(console.log);
+});
+
+fetch('/api/v1/posts')
+  .then((res) => res.json())
+  .then((res) => createPosts(res));
+
+//   .catch((err) => console.log(err));
+
+const postSection = document.querySelector('.posts');
 
 function createPosts(data) {
   data.forEach((element) => {
     const post = document.createElement('div');
+    post.classList.add('post');
     const category = document.createElement('h4');
     category.textContent = `${element.category}`;
     const content = document.createElement('p');
+
     content.textContent = `${element.content}`;
     const image = document.createElement('img');
     image.setAttribute('src', `${element.image}`);
     const iconsDiv = document.createElement('div');
-
+    iconsDiv.classList.add('icons');
     const likeContainer = document.createElement('div');
     const likeIcon = document.createElement('i');
     likeIcon.classList.add('fa-solid');
@@ -42,6 +66,6 @@ function createPosts(data) {
     post.appendChild(image);
     post.appendChild(iconsDiv);
 
-    postSection.appendChild(post)
+    postSection.appendChild(post);
   });
 }
