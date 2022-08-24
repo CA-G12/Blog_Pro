@@ -129,3 +129,23 @@
   .fa-thumbs-up:hover{
     cursor: pointer;
   }
+  .landing-img{
+    width: 100%;
+    margin-top: 6rem;
+  }
+  .start{
+    margin-left: 11rem;
+    margin-top: 5rem;
+    width: 5rem;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #aabbee;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .start a{
+    color: white;
+    text-decoration: none;
+  }
