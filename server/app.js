@@ -10,6 +10,6 @@ app.use(express.static(join(__dirname, '..', 'public')));
 
 app.use('/api/v1', router);
 
-app.set('port', process.env.port || 7000);
+app.set('port', process.env.PORT || 7000);
 
 module.exports = app;
