@@ -20,7 +20,8 @@ jobs:
           POSTGRES_PASSWORD: 123456
           POSTGRES_USER: test
           POSTGRES_DB: test_databace
-          POSTGRES_PORT: 5432
+        ports:
+          5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -35,6 +36,5 @@ jobs:
 
       - name: Testing Routes
         run: npm test
-        
         env:
           TEST_DB: postgres://test:123456@localhost:5432/test_databace
