@@ -123,3 +123,9 @@
     opacity: 1;
     visibility: visible;
   }
+  .iconColor{
+    color: blue !important;
+  }
+  .fa-thumbs-up:hover{
+    cursor: pointer;
+  }

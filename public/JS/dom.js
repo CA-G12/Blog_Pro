@@ -27,8 +27,8 @@ const commentFunction = (data) => {
     const para = document.createElement('p');
     popUpBody.appendChild(para);
     para.textContent = ele.comment;
-    input.addEventListener('keypress', (e)=>{
-      if (e.key === "Enter") {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
         fetch('api/v1/comments', {
           method: 'POST',
           headers: {
@@ -36,16 +36,16 @@ const commentFunction = (data) => {
           },
           body: JSON.stringify({
             comment: input.value,
-            posts_id: ele.posts_id
+            posts_id: ele.posts_id,
           }),
-        }).then(data=> data.json()).then(res=> {
+        }).then((data) => data.json()).then((res) => {
           const para = document.createElement('p');
-    popUpBody.appendChild(para);
-    para.textContent = res[0].comment;
-    input.value=""
-        })
+          popUpBody.appendChild(para);
+          para.textContent = res[0].comment;
+          input.value = '';
+        });
       }
-    })
+    });
     popUpBody.appendChild(input);
   });
 };
@@ -74,6 +74,9 @@ function createPosts(data) {
     const likeIcon = document.createElement('i');
     likeIcon.classList.add('fa-solid');
     likeIcon.classList.add('fa-thumbs-up');
+    likeContainer.addEventListener('click', () => {
+      likeIcon.classList.toggle('iconColor');
+    });
     const likeSpan = document.createElement('span');
     likeSpan.textContent = 'Like';
     likeContainer.appendChild(likeIcon);
@@ -89,7 +92,7 @@ function createPosts(data) {
     commentContainer.appendChild(commentSpan);
     commentContainer.addEventListener('click', (e) => {
       popUpSec.classList.add('active');
-        fetchComment(element.id);
+      fetchComment(element.id);
     });
 
     const deleteContainer = document.createElement('div');
@@ -100,6 +103,17 @@ function createPosts(data) {
     deleteSpan.textContent = 'delete';
     deleteContainer.appendChild(deleteIcon);
     deleteContainer.appendChild(deleteSpan);
+    deleteContainer.addEventListener('click', () => {
+      fetch('api/v1/delete', {
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: element.id,
+        }),
+      }).then((data) => location.reload());
+    });
 
     iconsDiv.appendChild(likeContainer);
     iconsDiv.appendChild(commentContainer);
