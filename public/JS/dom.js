@@ -7,6 +7,7 @@ const popUpSec = document.querySelector('.pop-up-sec');
 
 const commentFunction = (data) => {
   data.forEach((ele) => {
+    console.log(ele);
     const popUpBody = document.createElement('div');
     popUpBody.className = 'pop-up-body';
     popUpSec.appendChild(popUpBody);
@@ -23,10 +24,29 @@ const commentFunction = (data) => {
     const placeHolder = document.createAttribute('placeholder');
     placeHolder.textContent = 'write a comment';
     input.setAttributeNode(placeHolder);
-    popUpBody.appendChild(input);
     const para = document.createElement('p');
     popUpBody.appendChild(para);
     para.textContent = ele.comment;
+    input.addEventListener('keypress', (e)=>{
+      if (e.key === "Enter") {
+        fetch('api/v1/comments', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            comment: input.value,
+            posts_id: ele.posts_id
+          }),
+        }).then(data=> data.json()).then(res=> {
+          const para = document.createElement('p');
+    popUpBody.appendChild(para);
+    para.textContent = res[0].comment;
+    input.value=""
+        })
+      }
+    })
+    popUpBody.appendChild(input);
   });
 };
 
