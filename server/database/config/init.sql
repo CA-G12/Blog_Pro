@@ -30,9 +30,6 @@ Separated by just a few games, watch these two teams battle it out on the free F
 Join Carter Woodiel and Michael Lang, sit back and enjoy the action!', 'https://i.pinimg.com/564x/dd/64/19/dd641949057f0fc55745a1b982f26fbc.jpg');
 
 INSERT INTO comments (comment, posts_id) values
-('Conference Semifinals might not have gone the way the Dallas Mustangs wanted', '1'),
-('Conference Semifinals might not have gone the way the Dallas Mustangs wanted', '2'),
-('Conference Semifinals might not have gone the way the Dallas Mustangs wanted', '3'),
 ('Conference Semifinals might not have gone the way the Dallas Mustangs wanted', '1');
 
 COMMIT;
