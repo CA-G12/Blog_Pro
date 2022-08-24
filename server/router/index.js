@@ -5,5 +5,5 @@ const getDataController = require('../controllers/getData');
 
 router.get('/posts', getDataController);
 router.post('/post', postHandler);
-router.get('/getCommit', getCommentData);
+router.get('/getComment/:id', getCommentData);
 module.exports = router;
