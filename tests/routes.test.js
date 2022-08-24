@@ -1,17 +1,22 @@
 const request = require('supertest');
 const app = require('../server/app');
+const dbBuild = require('../server/database/config/build');
+const connection = require('../server/database/config/connection');
 
-// eslint-disable-next-line no-undef
+beforeAll(() => dbBuild());
+afterAll(() => connection.end());
+
 test('test post endpoint', (done) => {
   request(app)
     .post('/api/v1/post')
     .send({ category: 'husam', image: 'husam', content: 'kamal' })
-    .end((err,res) => {
-      console.log(err);
+    .end((err, res) => {
       if (err) return done(err);
-      console.log(res.body);
+
       expect(res.statusCode).toEqual(200);
-      expect(res.body.data).toEqual({ category: 'husam', image: 'husam', content: 'kamal' });
+      expect(res.body.data).toEqual({
+        id: 5, category: 'husam', image: 'kamal', content: 'husam',
+      });
       return done();
     });
 });
