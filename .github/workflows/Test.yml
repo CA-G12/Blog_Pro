@@ -33,4 +33,4 @@ jobs:
       - name: Testing Routes
         run: npm test
         env:
-          TEST_DB: postgres://test:123456@postgres:5432/test_database
+          TEST_DB_URL: postgres://test:123456@postgres:5432/test_database
