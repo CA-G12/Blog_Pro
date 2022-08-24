@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap%27");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.25s ease-in-out;
+    scroll-behavior: smooth;
+    font-family: "Poppins", sans-serif;
+  }
+
+.header{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+.header button{
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.header input{
+    border-radius: 10px;
+    border: 1px solid #dddada;
+}
+.post{
+    border-radius: 10px;
+    margin: 1.5rem;
+    box-shadow: rgb(133 133 133) 0px 0px 15px;
+    transition: all 0.3s linear;
+    padding: 10px;
+    margin-top: 3rem;
+}
+
+.post img{
+    width: 330px;
+    height: 260px;
+    margin-left: 8px;
+    object-fit: cover;
+}
+
+.post .icons{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0px;
+}
+.post p{
+    font-size: 12px;
+    margin: 10px;
+}
+
+.icons span{
+    margin-left: 5px;
+}
+.icons i{
+    color: #a7a6a6;
+}
+
+.form{
+    margin: 3rem 0px;
+}
+.form div{
+    margin: 1rem;
+    display: flex;
+    justify-content: space-around;
+}
+.form input, textarea{
+    width: 190px;
+}
+.form button{
+    margin-left: 18rem;
+    width: 5rem;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.pop-up-sec{
+    /* display: flex;
+    justify-content: center; */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background-color: rgb(219 219 219 / 46%);
+    padding: 25px;
+    visibility: hidden;
+    transition: all .4s ease;
+}
+
+  .pop-up-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    background-color: #fbfbfb;
+    position: relative;
+    padding: 1rem;
+    border-radius: 40px;
+    padding: 3rem;
+    transform: scale(.8);
+    margin-top: 8rem;
+  }
+
+  .pop-up-body input{
+    width: 18rem;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #dddada;
+  }
+
+  .pop-up-body p{
+    font-size: 15px;
+  }
+  .pop-up-body i{
+    position: absolute;
+    right: 28px;
+    top: 18px;
+    cursor: pointer;
+  }
+  .pop-up-sec.active{
+    opacity: 1;
+    visibility: visible;
+  }
