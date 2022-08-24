@@ -1,17 +1,12 @@
-name: Test
+name: CI
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
-env:
-  JWT_SECRET: ${{ secrets.JWT_SECRET }}
-  ADMIN: ${{ secrets.ADMIN }}
 
 jobs:
   container-job:
     runs-on: ubuntu-latest
-    container: node:16
+    container: node:14
 
     services:
       postgres:
