@@ -149,3 +149,27 @@
     color: white;
     text-decoration: none;
   }
+
+  @media (min-width:1200px){
+.posts .post{
+    width: 50%;
+    margin-left: 20rem;
+}
+.post img {
+    width: 595px;
+}
+
+.content-main{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.landing-img{
+    width: 55%;
+    margin-top: 1rem;
+}
+.content-main button{
+    margin-right: 13rem;
+   
+}
+  }
