@@ -6,7 +6,6 @@ const postSection = document.querySelector('.posts');
 const popUpSec = document.querySelector('.pop-up-sec');
 
 const commetFunction = (data) => {
-  console.log(data);
   data.forEach((ele) => {
     const popUpBody = document.createElement('div');
     popUpBody.className = 'pop-up-body';
@@ -15,6 +14,9 @@ const commetFunction = (data) => {
     const closeIcon = document.createElement('i');
     closeIcon.classList.add('fa-solid');
     closeIcon.classList.add('fa-circle-xmark');
+    closeIcon.addEventListener('click', () => {
+      popUpSec.classList.remove('active');
+    });
     popUpBody.appendChild(closeIcon);
 
     const input = document.createElement('input');
@@ -33,12 +35,11 @@ const fetchComment = () => {
 };
 
 function createPosts(data) {
-  console.log(data, 88);
   data.forEach((element) => {
     const post = document.createElement('div');
     post.classList.add('post');
     const id = document.createAttribute('id');
-    id.textContent = element.id;
+    id.textContent = `${element.id}`;
     post.setAttributeNode(id);
     const category = document.createElement('h4');
     category.textContent = `${element.category}`;
@@ -53,33 +54,35 @@ function createPosts(data) {
     const likeIcon = document.createElement('i');
     likeIcon.classList.add('fa-solid');
     likeIcon.classList.add('fa-thumbs-up');
-    const likeSpan= document.createElement('span')
-    likeSpan.textContent='Like'
-    commentContainer.appendChild(likeSpan);
+    const likeSpan = document.createElement('span');
+    likeSpan.textContent = 'Like';
     likeContainer.appendChild(likeIcon);
+    likeContainer.appendChild(likeSpan);
 
     const commentContainer = document.createElement('div');
     const commentIcon = document.createElement('i');
     commentIcon.classList.add('fa-solid');
     commentIcon.classList.add('fa-comment');
-    const commentSpan= document.createElement('span')
-    commentSpan.textContent='Comment'
-    commentContainer.appendChild(commentSpan);
+    const commentSpan = document.createElement('span');
+    commentSpan.textContent = 'Comment';
     commentContainer.appendChild(commentIcon);
+    commentContainer.appendChild(commentSpan);
     commentContainer.addEventListener('click', (e) => {
-      console.log(e.target.parentNode.parentNode.parentNode);
-      popUpSec.classList.add('active');
-      fetchComment();
+      console.log(e.target.parentNode.parentNode.parentNode.id == element.id);
+      if (e.target.parentNode.parentNode.parentNode.id == element.id) {
+        popUpSec.classList.add('active');
+        fetchComment();
+      }
     });
 
     const deleteContainer = document.createElement('div');
     const deleteIcon = document.createElement('i');
     deleteIcon.classList.add('fa-solid');
     deleteIcon.classList.add('fa-trash');
-    const deleteSpan= document.createElement('span')
-    deleteSpan.textContent='Comment'
-    commentContainer.appendChild(deleteSpan);
+    const deleteSpan = document.createElement('span');
+    deleteSpan.textContent = 'delete';
     deleteContainer.appendChild(deleteIcon);
+    deleteContainer.appendChild(deleteSpan);
 
     iconsDiv.appendChild(likeContainer);
     iconsDiv.appendChild(commentContainer);
@@ -108,6 +111,9 @@ addButtonPost.addEventListener('click', (e) => {
   })
     .then((data) => data.json()).then((res) => {
       createPosts(res.data);
+      categoryPost.value = '';
+      imagePost.value = '';
+      contentPost.value = '';
     });
 });
 
