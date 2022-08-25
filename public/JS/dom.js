@@ -5,53 +5,58 @@ const contentPost = document.querySelector('#content');
 const postSection = document.querySelector('.posts');
 const popUpSec = document.querySelector('.pop-up-sec');
 
-const commentFunction = (data) => {
+const commentFunction = (data, id) => {
+  popUpSec.textContent = '';
+  if (data.length === 0) {
+    data = [{ id: 0, comment: 'Be the first to comment', posts_id: id }];
+  }
+
+  const popUpBody = document.createElement('div');
+  popUpBody.className = 'pop-up-body';
+  popUpSec.appendChild(popUpBody);
+
+  const closeIcon = document.createElement('i');
+  closeIcon.classList.add('fa-solid');
+  closeIcon.classList.add('fa-circle-xmark');
+  closeIcon.addEventListener('click', () => {
+    popUpSec.classList.remove('active');
+  });
+  popUpBody.appendChild(closeIcon);
+
+  const input = document.createElement('input');
+  const placeHolder = document.createAttribute('placeholder');
+  placeHolder.textContent = 'write a comment';
+  input.setAttributeNode(placeHolder);
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      fetch('api/v1/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          comment: input.value,
+          posts_id: id,
+        }),
+      }).then((data) => data.json()).then((res) => {
+        const para = document.createElement('p');
+        popUpBody.appendChild(para);
+        para.textContent = res[0].comment;
+        input.value = '';
+      });
+    }
+  });
+  popUpBody.appendChild(input);
+
   data.forEach((ele) => {
-    console.log(ele);
-    const popUpBody = document.createElement('div');
-    popUpBody.className = 'pop-up-body';
-    popUpSec.appendChild(popUpBody);
-
-    const closeIcon = document.createElement('i');
-    closeIcon.classList.add('fa-solid');
-    closeIcon.classList.add('fa-circle-xmark');
-    closeIcon.addEventListener('click', () => {
-      popUpSec.classList.remove('active');
-    });
-    popUpBody.appendChild(closeIcon);
-
-    const input = document.createElement('input');
-    const placeHolder = document.createAttribute('placeholder');
-    placeHolder.textContent = 'write a comment';
-    input.setAttributeNode(placeHolder);
     const para = document.createElement('p');
     popUpBody.appendChild(para);
     para.textContent = ele.comment;
-    input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        fetch('api/v1/comments', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            comment: input.value,
-            posts_id: ele.posts_id,
-          }),
-        }).then((data) => data.json()).then((res) => {
-          const para = document.createElement('p');
-          popUpBody.appendChild(para);
-          para.textContent = res[0].comment;
-          input.value = '';
-        });
-      }
-    });
-    popUpBody.appendChild(input);
   });
 };
 
 const fetchComment = (id) => {
-  fetch(`api/v1/getComment/${id}`).then((res) => res.json()).then((data) => commentFunction(data));
+  fetch(`api/v1/getComment/${id}`).then((res) => res.json()).then((data) => commentFunction(data, id));
 };
 
 function createPosts(data) {
@@ -90,7 +95,7 @@ function createPosts(data) {
     commentSpan.textContent = 'Comment';
     commentContainer.appendChild(commentIcon);
     commentContainer.appendChild(commentSpan);
-    commentContainer.addEventListener('click', (e) => {
+    commentContainer.addEventListener('click', () => {
       popUpSec.classList.add('active');
       fetchComment(element.id);
     });
